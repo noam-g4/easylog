@@ -51,14 +51,14 @@ func Test_defaultLogger(t *testing.T) {
 	}
 
 	log.Infof("test %d", 2)
-	got := stripMessage(writer.get(), 2)
-	if got != "INFO: test 2" {
+	got := stripMessage(writer.get(), 3)
+	if got != "test 2" {
 		t.Errorf("incorrect message format: %s", got)
 	}
 
 	log.Debug("test")
-	got = stripMessage(writer.get(), 2)
-	if got != "DEBUG: test" {
+	got = stripMessage(writer.get(), 3)
+	if got != "test" {
 		t.Errorf("incorrect message format: %s", got)
 	}
 	log.Debugf("test %d", 2)
@@ -66,8 +66,8 @@ func Test_defaultLogger(t *testing.T) {
 	log2 := getLogger("PROD", true, false)
 	log2.Debugf("skip this %s", "message")
 	log2.Debug("skip this also")
-	got = stripMessage(writer.get(), 2)
-	if got != "DEBUG: test 2" {
+	got = stripMessage(writer.get(), 3)
+	if got != "test 2" {
 		t.Errorf("incorrect message format: %s", got)
 	}
 
@@ -83,8 +83,8 @@ func Test_defaultLogger(t *testing.T) {
 	log3.Infof("skip this %d", 2)
 	log3.Debug("skip this")
 	log3.Debugf("skip this %d", 2)
-	got = stripMessage(writer.get(), 2)
-	if got != "ERROR: error 2" {
+	got = stripMessage(writer.get(), 3)
+	if got != "error 2" {
 		t.Errorf("incorrect message format: %s", got)
 	}
 }

@@ -102,7 +102,7 @@ func (logger *defaultLogger) Failf(msg string, args ...any) {
 }
 
 func (logger *defaultLogger) log(mode, msg string) {
-	prefix := fmt.Sprintf("%s | %s | %s:", time.Now().Format(time.RFC3339), logger.env, mode)
+	prefix := fmt.Sprintf("%s | %s | %s |", time.Now().Format(time.RFC3339), logger.env, mode)
 	fmt.Fprintf(logger.writer, "%s %s\n", prefix, msg)
 }
 
